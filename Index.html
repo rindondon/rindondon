@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Game</title>
+</head>
+<body>
+  <style type="text/css" media="all">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      display: block;
+    }
+  </style>
+  <script src="p5.js"></script>
+  
+  <script>
+    function setup(){
+      var canvas = createCanvas(windowWidth, windowHeight);
+      canvas.style.display = "block";
+    }
+    
+    var x = Math.random(412), y=-100, w=50;
+    var x1=100, y1=100, w1=80;
+    var velY = 5;
+    var life = 3;
+    var scr = 0;
+    function draw(){
+      background(0);
+      
+      if(life != 0) {
+        y += velY;
+        scr += 0.1;
+        velY += 0.01;
+        x1 += (mouseX - x1) * 0.1;
+        y1 += (mouseY -y1) * 0.1;
+      }
+      
+      if(y >= height) {
+        x = Math.random() * 412-50;
+        y = -100;
+        life -= 1;
+      }
+      
+      if(x+w>x1 && x<(x1+w1) && y+w>y1 && y<(y1+w1/2)) {
+        x = Math.random() * 412-50;
+        y = -100;
+      }
+      
+      fill(255);
+      text(life, 50, 50);
+      text(Math.floor(scr), 300, 50)
+      textSize(50);
+      
+      fill(41,227,104);
+      rect(x, y, w, w);
+      fill(245,35,81);
+      ellipse(x1, y1, w1, w1);
+    }
+  </script>
+</body>
+</html>
